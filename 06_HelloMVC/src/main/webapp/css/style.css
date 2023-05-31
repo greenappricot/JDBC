@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body{
-	font-family:"휴먼모음T";
+	/*font-family:"휴먼모음T";*/
+	margin:0;
 }
 
 
@@ -11,7 +12,7 @@ div#container{
 }
 
 header{
-	background-color:#00BCD4;
+	background-color:rgb(167, 213, 216);
 	height:130px;
 	position:relative;
 	padding:10px 0 0 0;
@@ -28,7 +29,7 @@ section#content{
 }
 
 footer{
-	background-color:#00BCD4;
+	background-color:rgb(167, 213, 216);
 	clear:both;
 	height:75px;
 	text-align:center;
@@ -39,11 +40,11 @@ footer{
 header div.login-container{width:250px; position:absolute; right: 0px; top: 10px;}
 
 #loginFrm table{empty-cells:hide;}
-#loginFrm input[type=submit]{width:60px; height:50px; color:white; background:#3300ff; position:absolute; top:10px;}
+#loginFrm input[type=submit]{width:60px; height:50px; color:white; background-color: rgb(52, 179, 220);  position:absolute; top:10px;}
 #saveId+label{font-size:12px;font-family:'고딕'}
 
 /* 메뉴관련스타일 */
-header nav {background:#5283de; width:100%; margin-top:40px;}
+header nav {background-color: rgb(52, 179, 220);  width:100%; margin-top:40px;}
 
 /* ul태그의 가운데정렬 */
 ul.main-nav{
@@ -58,11 +59,10 @@ ul.main-nav li {
 	height: 2em;
 	float: left; 
 	text-align: center; 
-	font-family: "휴먼모음T", sans-serif; 
-	border-left: 1px #00bcd4 solid;
-	background-color: #5283de; 
+	border-left: 1px rgb(138, 232, 242) solid;
+	background-color: rgb(52, 179, 220); 
 }
-ul.main-nav li:last-of-type{border-right:1px #00bcd4 solid;;}
+ul.main-nav li:last-of-type{border-right:1px rgb(138, 232, 242) solid;}
 ul.main-nav li a {
 	display: block;
 	padding:.5em;
@@ -72,7 +72,7 @@ ul.main-nav li a {
 
 /* hover시 배경색 변경 */
 ul.main-nav li:hover{
-	background-color: #3300ff;
+	background-color: rgb(0, 128, 192);
 }
 ul.main-nav li:hover > a{
 	color:#FFF; /* 글자색*/
@@ -83,3 +83,9 @@ section#enroll-container input{margin:3px;}
 section#enroll-container table{margin:0 auto;}
 section#enroll-container table th {padding:0 10px; text-align:right;}
 section#enroll-container table td {padding:0 10px; text-align:left;}
+
+section#memberList-container {text-align:center;}
+    
+section#memberList-container table#tbl-member {width:100%; border:1px solid gray; border-collapse:collapse;}
+section#memberList-container table#tbl-member th, table#tbl-member td {border:1px solid gray; padding:10px; }
+

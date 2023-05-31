@@ -66,6 +66,42 @@ public class AdminDao {
 		}return result;
 	}
 	
+	public List<Member> searchMemberByKeyword(Connection conn, String searchType, String keyword) {
+		List<Member> m=new ArrayList<Member>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql=this.sql.getProperty("selectMemberByKeyword");
+			sql=sql.replace("#COL", searchType);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public List<Member> searchMemberById(Connection conn,String keyword) {
+		List<Member> m=new ArrayList<Member>();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchMemberById"));
+			pstmt.setString(1, "%"+keyword+"%");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	
+	
 //	public Member getMember(ResultSet rs) throws SQLException {
 //		return Member.builder().userId(rs.getString("USERID")).password(rs.getString("PASSWORD")).userName(rs.getString("USERNAME")).age(rs.getInt("AGE"))
 //				.gender(rs.getString("GENDER").charAt(0)).email(rs.getString("EMAIL")).phone(rs.getString("PHONE")).address(rs.getString("ADDRESS"))

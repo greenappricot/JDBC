@@ -25,4 +25,17 @@ public class AdminService {
 		return result;
 	}
 	
+	public List<Member> searchMemberByKeyword(String searchType,String keyword) {
+		Connection conn=getConnection();
+		List<Member> m=dao.searchMemberByKeyword(conn, searchType, keyword);
+		close(conn);
+		return m;
+	}
+	public List<Member> searchMemberById(String keyword) {
+		Connection conn=getConnection();
+		List<Member> m=dao.searchMemberById(conn, keyword);
+		close(conn);
+		return m;
+	}
+	
 }

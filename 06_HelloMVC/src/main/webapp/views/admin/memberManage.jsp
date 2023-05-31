@@ -3,7 +3,8 @@
 <%@ page import="com.web.member.model.dao.MemberDao, java.util.List" %>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	List<Member> members = (List)request.getAttribute("members"); 
+	List<Member> members = (List)request.getAttribute("members");
+
 %>
 <style>
     section#memberList-container table#tbl-member {width:100%; border:1px solid gray; border-collapse:collapse;}

@@ -41,7 +41,6 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		Member loginMember=new MemberService()
 					.selectByUserIdAndPw(userId, password);
-		
 		//아이디저장 로직처리
 		String saveId=request.getParameter("saveId");
 		System.out.println(saveId);

@@ -29,20 +29,16 @@
 			<div class="login-container">
 			<%if(loginMember==null){ %>
 				<form id="loginFrm" 
-				action="<%=request.getContextPath()%>/login.do"
-				method="post" onsubmit="return fn_validation();">
+				action="<%=request.getContextPath()%>/login.do" method="post" onsubmit="return fn_validation();">
 					<table>
 						<tr>
 							<td>
-								<input type="text" name="userId"
-								id="userId" placeholder="아이디"
-								value="<%=saveId!=null?saveId:""%>">
+								<input type="text" name="userId" id="userId" placeholder="아이디" value="<%=saveId!=null?saveId:""%>">
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="password" name="password"
-								id="password" placeholder="패스워드">
+								<input type="password" name="password" id="password" placeholder="패스워드">
 							</td>
 							<td>
 								<input type="submit" value="로그인">
@@ -50,11 +46,9 @@
 						</tr>
 						<tr>
 							<td>
-								<input type="checkbox" name="saveId"
-								id="saveId" <%=saveId!=null?"checked":"" %>>
+								<input type="checkbox" name="saveId" id="saveId" <%=saveId!=null?"checked":"" %>>
 								<label for="saveId">아이디저장</label>
-								<input type="button" value="회원가입"
-								onclick="location.assign('<%=request.getContextPath()%>/member/enrollMember.do')">
+								<input type="button" value="회원가입" onclick="location.assign('<%=request.getContextPath()%>/member/enrollMember.do')">
 							</td>
 						</tr>
 					</table>
@@ -63,7 +57,7 @@
 					<table id="logged-in">
 						<tr>
 							<td colspan="2">
-								<%=loginMember.getUserName() %>님, 환영합니다. :)
+								<%=loginMember.getUserName() %>님, 환영합니다 :)
 							</td>
 						</tr>
 						<tr>
@@ -71,8 +65,7 @@
 								<input type="button" onclick="location.assign('<%=request.getContextPath() %>/member/memberView.do?userId=<%=loginMember.getUserId() %>')" value="내 정보보기">
 							</td>
 							<td>
-								<input type="button" value="로그아웃"
-								onclick="location.replace('<%=request.getContextPath()%>/logout.do')">
+								<input type="button" value="로그아웃" onclick="location.replace('<%=request.getContextPath()%>/logout.do')">
 							</td>
 						</tr>
 					</table>
@@ -83,10 +76,14 @@
 					<li class="home"><a href="">Home</a></li>
 					<li id="notice"><a href="">공지사항</a></li>
 					<li id="board"><a href="">게시판</a></li>
+					<%if(loginMember!=null&&loginMember.getUserId().equals("admin")){ %> <!-- 어드민 계정으로 로그인한 게 아니면 회원관리 메뉴 안 나오게 하기 --> 
+						<li id="memberManage"><a href="<%=request.getContextPath()%>/admin/memberList.do">회원관리</a></li>
+					<%} %>
 				</ul>
 			</nav>
 		</header>
 		<script>
+			
 			const fn_validation=()=>{
 				const userId=$("#userId").val();
 				if(userId.length<4){

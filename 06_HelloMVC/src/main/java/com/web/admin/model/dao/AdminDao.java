@@ -37,6 +37,7 @@ public class AdminDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				m.add(getMember(rs));
+//				 MemberDao에 있는 getMember를 static 메소드로 만들어서 접근할 수 있다.
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -66,48 +67,66 @@ public class AdminDao {
 		}return result;
 	}
 	
-	public List<Member> searchMemberByKeyword(Connection conn, String searchType, String keyword) {
+//	public List<Member> selectMemberByKeyword(Connection conn, String searchType, String keyword) { // 페이징 처리 전 
+//		List<Member> m=new ArrayList<Member>();
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		String query=this.sql.getProperty("selectMemberByKeyword").replace("#COL", searchType);
+//		try {
+//			pstmt=conn.prepareStatement(query);
+//			pstmt.setString(1, searchType.equals("gender")?keyword:"%"+keyword+"%"); // gender에는 %없이 M, F 찾기 때문에 분기처리해준다.
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) m.add(getMember(rs));
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return m;
+//	}
+	
+	public List<Member> selectMemberByKeyword(Connection conn, String searchType, String keyword, int cPage, int numPerpage) {
 		List<Member> m=new ArrayList<Member>();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql=this.sql.getProperty("selectMemberByKeyword");
-			sql=sql.replace("#COL", searchType);
+		String query=this.sql.getProperty("selectMemberByKeyword").replace("#COL", searchType);
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+keyword+"%");
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, searchType.equals("gender")?keyword:"%"+keyword+"%"); 
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) m.add(getMember(rs));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}
-		return m;
+		}return m;
 	}
 	
-	public List<Member> searchMemberById(Connection conn,String keyword) {
-		List<Member> m=new ArrayList<Member>();
+	public int selectMemberByKeywordCount(Connection conn, String searchType, String keyword) {
+		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+		String query=sql.getProperty("selectMemberByKeywordCount").replace("#COL", searchType);
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("searchMemberById"));
-			pstmt.setString(1, "%"+keyword+"%");
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, searchType.equals("gender")?keyword:"%"+keyword+"%");
+			rs=pstmt.executeQuery(); // select 문으로 쿼리 실행하기 때문에 ResultSet으로 executeQuery 해야한다.
+			if(rs.next()) {
+				result=rs.getInt(1); // 결과값 저장하기
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}
-		return m;
+		}return result;
 	}
 	
 	
-	
-//	public Member getMember(ResultSet rs) throws SQLException {
-//		return Member.builder().userId(rs.getString("USERID")).password(rs.getString("PASSWORD")).userName(rs.getString("USERNAME")).age(rs.getInt("AGE"))
-//				.gender(rs.getString("GENDER").charAt(0)).email(rs.getString("EMAIL")).phone(rs.getString("PHONE")).address(rs.getString("ADDRESS"))
-//				.hobby(rs.getString("HOBBY").split(",")).enrollDate(rs.getDate("ENROLLDATE")).build();
-//	} MemberDao에 있는 getMember를 static 메소드로 만들어서 접근할 수 있다.
-	
+
 	
 	
 	

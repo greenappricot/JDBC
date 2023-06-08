@@ -6,4 +6,4 @@
 		안녕하세요,MVC입니다.
 	</h2>
 </section>
-<%@ include file="/views/common/footer.jsp" %>		
+<%@ include file="/views/common/footer.jsp" %>

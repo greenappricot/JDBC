@@ -10,6 +10,7 @@ import com.web.admin.model.dao.AdminDao;
 import com.web.member.model.vo.Member;
 
 public class AdminService {
+	
 	private AdminDao dao=new AdminDao();
 	public List<Member> searchMemberAll(int cpage,int numPerPage) {
 		Connection conn=getConnection();
@@ -25,17 +26,25 @@ public class AdminService {
 		return result;
 	}
 	
-	public List<Member> searchMemberByKeyword(String searchType,String keyword) {
+//	public List<Member> selectMemberByKeyword(String searchType,String keyword) { 
+//		Connection conn=getConnection();
+//		List<Member> m=dao.selectMemberByKeyword(conn, searchType, keyword);
+//		close(conn);
+//		return m;
+//	}
+	public List<Member> selectMemberByKeyword(String searchType, String keyword, int cPage, int numPerPage) { 
+		// 페이징 처리하기 위해 매개변수 추가해줬음 -> 처음에 map으로 매개변수 받았으면 수정할 필요 없음..
 		Connection conn=getConnection();
-		List<Member> m=dao.searchMemberByKeyword(conn, searchType, keyword);
-		close(conn);
-		return m;
-	}
-	public List<Member> searchMemberById(String keyword) {
-		Connection conn=getConnection();
-		List<Member> m=dao.searchMemberById(conn, keyword);
+		List<Member> m=dao.selectMemberByKeyword(conn, searchType, keyword, cPage, numPerPage);
 		close(conn);
 		return m;
 	}
 	
+	public int selectMemberByKeywordCount(String searchType,String keyword) {
+		Connection conn=getConnection();
+		int count= dao.selectMemberByKeywordCount(conn, searchType, keyword);
+		close(conn);
+		return count;
+	}
+
 }

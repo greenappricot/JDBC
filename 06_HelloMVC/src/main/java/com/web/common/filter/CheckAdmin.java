@@ -20,7 +20,9 @@ import com.web.member.model.vo.Member;
  */
 //@WebFilter(servletNames= {
 		//"memberList"}) 
-@WebFilter("/admin/*")
+@WebFilter(
+		urlPatterns={"/admin/*","/notice/insertForm.do"}
+		)
 public class CheckAdmin extends HttpFilter implements Filter {
        
     /**

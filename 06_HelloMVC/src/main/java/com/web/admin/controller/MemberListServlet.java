@@ -33,22 +33,28 @@ public class MemberListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 페이징 처리하기
-		int cPage;
+		int cPage, numPerpage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=10;
+		
+		try {
+			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
+		}catch(NumberFormatException e) {
+			numPerpage=10;
+		}
+//		int numPerPage=10;
 		// 1. db에서 member 테이블에서 데이터 가져오기
-		List<Member> members=new AdminService().searchMemberAll(cPage,numPerPage);
+		List<Member> members=new AdminService().searchMemberAll(cPage,numPerpage);
 		// 2. db에서 가져온 데이터 저장(화면출력)
 		request.setAttribute("members", members);
 		// 3. 페이지 바 구성
 		//	1) db에 저장된 전체 데이터 수 가져오기
 		int totalData= new AdminService().selectMemberCount();
 		//	2) 전체 페이지 수를 계산하기 * 소수점 주의 totalData/numPerPage 값을 올림해서 int로 형변환한다.
-		int totalPage= (int)Math.ceil((double)totalData/numPerPage);
+		int totalPage= (int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize= 5;
 		//	3) 페이지바 시작 번호 계산하기 -> 시작 번호, 끝 번호 설정해놓고 끝번호 만날 때까지 1씩 증가하게 한다. -> 반복문
 		int pageNo= ((cPage-1)/pageBarSize)*pageBarSize+1; // (ex < 1 2 3 4 5 > 에서 1)

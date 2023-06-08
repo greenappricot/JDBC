@@ -6,4 +6,8 @@
 		안녕하세요,MVC입니다.
 	</h2>
 </section>
+<<<<<<< HEAD
 <%@ include file="/views/common/footer.jsp" %>
+=======
+<%@ include file="/views/common/footer.jsp" %>		
+>>>>>>> branch 'master' of https://github.com/greenappricot/JDBC

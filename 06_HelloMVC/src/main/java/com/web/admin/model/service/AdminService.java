@@ -10,6 +10,7 @@ import com.web.admin.model.dao.AdminDao;
 import com.web.member.model.vo.Member;
 
 public class AdminService {
+<<<<<<< HEAD
 	
 	private AdminDao dao=new AdminDao();
 	public List<Member> searchMemberAll(int cpage,int numPerPage) {
@@ -47,4 +48,34 @@ public class AdminService {
 		return count;
 	}
 
+=======
+	private AdminDao dao=new AdminDao();
+	public List<Member> searchMemberAll(int cpage,int numPerPage) {
+		Connection conn=getConnection();
+		List<Member> members=dao.searchMemberAll(conn,cpage,numPerPage);
+		close(conn);
+		return members;
+	}
+	
+	public int selectMemberCount() {
+		Connection conn=getConnection();
+		int result=dao.selectMemberCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<Member> searchMemberByKeyword(String searchType,String keyword) {
+		Connection conn=getConnection();
+		List<Member> m=dao.searchMemberByKeyword(conn, searchType, keyword);
+		close(conn);
+		return m;
+	}
+	public List<Member> searchMemberById(String keyword) {
+		Connection conn=getConnection();
+		List<Member> m=dao.searchMemberById(conn, keyword);
+		close(conn);
+		return m;
+	}
+	
+>>>>>>> branch 'master' of https://github.com/greenappricot/JDBC
 }

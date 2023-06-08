@@ -74,7 +74,11 @@
 			<nav>
 				<ul class="main-nav">
 					<li class="home"><a href="">Home</a></li>
+<<<<<<< HEAD
 					<li id="notice"><a href="<%=request.getContextPath() %>/notice/noticeList.do">공지사항</a></li>
+=======
+					<li id="notice"><a href="">공지사항</a></li>
+>>>>>>> branch 'master' of https://github.com/greenappricot/JDBC
 					<li id="board"><a href="">게시판</a></li>
 					<%if(loginMember!=null&&loginMember.getUserId().equals("admin")){ %> <!-- 어드민 계정으로 로그인한 게 아니면 회원관리 메뉴 안 나오게 하기 --> 
 						<li id="memberManage"><a href="<%=request.getContextPath()%>/admin/memberList.do">회원관리</a></li>

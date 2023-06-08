@@ -37,7 +37,6 @@ public class AdminDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				m.add(getMember(rs));
-<<<<<<< HEAD
 //				 MemberDao에 있는 getMember를 static 메소드로 만들어서 접근할 수 있다.
 			}
 		}catch(SQLException e) {
@@ -128,7 +127,6 @@ public class AdminDao {
 	
 	
 
-=======
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -200,7 +198,6 @@ public class AdminDao {
 //				.hobby(rs.getString("HOBBY").split(",")).enrollDate(rs.getDate("ENROLLDATE")).build();
 //	} MemberDao에 있는 getMember를 static 메소드로 만들어서 접근할 수 있다.
 	
->>>>>>> branch 'master' of https://github.com/greenappricot/JDBC
 	
 	
 	

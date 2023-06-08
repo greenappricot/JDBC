@@ -10,7 +10,6 @@ import com.web.admin.model.dao.AdminDao;
 import com.web.member.model.vo.Member;
 
 public class AdminService {
-<<<<<<< HEAD
 	
 	private AdminDao dao=new AdminDao();
 	public List<Member> searchMemberAll(int cpage,int numPerPage) {
@@ -48,7 +47,6 @@ public class AdminService {
 		return count;
 	}
 
-=======
 	private AdminDao dao=new AdminDao();
 	public List<Member> searchMemberAll(int cpage,int numPerPage) {
 		Connection conn=getConnection();
@@ -77,5 +75,4 @@ public class AdminService {
 		return m;
 	}
 	
->>>>>>> branch 'master' of https://github.com/greenappricot/JDBC
 }
